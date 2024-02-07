@@ -1,0 +1,59 @@
+.transContainer{
+    background-color: #e29c40e4;
+    height: 100%;
+
+}
+
+.homeText{
+    font-size: 3rem;
+    
+}
+
+.videoContainer{
+    background-color: aqua;
+    height: 300px;
+    width: 100%;
+}
+iframe{
+    margin-left: 30%;
+    height: 100%;
+}
+
+.video{
+    height: 100%;
+    background-color: rgb(249, 247, 246);
+    width: 100%;
+}
+
+.transContent{
+    background-color: aliceblue;
+    height: 100%;
+    
+
+}
+.home{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon{
+   
+   
+    height: 80px;
+    width: 90px;
+}
+
+.git{
+    margin-top: 10px;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+} 
+
+.gitHublink{
+    text-decoration: none;
+    color: aliceblue;
+}
+
