@@ -13,11 +13,11 @@ function Trans({transcript}) {
       <div className="home">
         <span className='homeText'>Source code</span>
          <div className="icon">
-         <a href='https://github.com/harshit91796/Video_to_transcripy' className='gitHublink'><GitHub color='white' fontSize='large'  className='git'/></a>
+         <a href='https://github.com/harshit91796/videoTotext_frontend' className='gitHublink'><GitHub color='white' fontSize='large'  className='git'/></a>
           <span>Frontend</span>
          </div>
          <div className="icon">
-         <a href='https://github.com/harshit91796/Video_to_transcript_backend' className='gitHublink'><GitHub fontSize='large' color='white'  className='git'/></a>
+         <a href='https://github.com/harshit91796/videoTotext_backend' className='gitHublink'><GitHub fontSize='large' color='white'  className='git'/></a>
            <span>Backend</span>
          </div>
         

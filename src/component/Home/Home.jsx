@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './home.css';
 import Trans from '../Result/Trans';
 import axios from 'axios';
@@ -8,9 +8,17 @@ import { CircularProgress } from '@mui/material';
 function Home() {
   const [videoFile, setVideoFile] = useState(null);
   const [transcriptData, setTranscriptData] = useState([]);
+  const [scrollToTranscript, setScrollToTranscript] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const transRef = useRef(null);
   const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollToTranscript && transRef.current) {
+      transRef.current.scrollIntoView({ behavior: 'smooth' });
+      setScrollToTranscript(false);
+    }
+  }, [scrollToTranscript]);
 
   const handleFileChange = (e) => {
     setVideoFile(e.target.files[0]);
@@ -31,7 +39,7 @@ function Home() {
       formData.append('video', videoFile);
 
       // You may need to update the URL to match your server-side video upload endpoint
-      const response = await axios.post('http://localhost:3000/api/upload-video', formData, {
+      const response = await axios.post('https://trans-backend.onrender.com/api/upload-video', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -43,14 +51,18 @@ function Home() {
       }
       console.log('bro',response.data);
       setTranscriptData(response.data.transcript);
+      setScrollToTranscript(true);
 
-      if (transRef.current) {
-        setIsLoading(false);
-        transRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
+      // if (transRef.current) {
+      //   setIsLoading(false);
+      //   transRef.current.scrollIntoView({ behavior: 'smooth' });
+      // }
     } catch (error) {
       console.error('Error fetching transcript:', error);
+    }finally {
+      setIsLoading(false);
     }
+  
 
   };
 
@@ -75,17 +87,18 @@ console.log('m',transcriptData)
               />
             </div>
             
-            {isLoading ? <CircularProgress/> :  <div className='formButton'>
+            { <div className='formButton'>
             <button type='submit' id='button'>
-              Get Transcript
+            {isLoading ? <CircularProgress color='inherit' size={20}/> :  'Get Transcript'}
             </button></div>}
           </form>
         </div>
       </div>
-
-      <div className='ref' ref={transRef}>
-        <Trans transcript={transcriptData} />
-      </div>
+      {transcriptData.length > 0 && (
+        <div className='ref' ref={transRef}>
+          <Trans transcript={transcriptData} />
+        </div>
+      )}
     </div>
   );
 }
